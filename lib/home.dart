@@ -11,19 +11,20 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
-    duration: const Duration (seconds:5),
+    duration: const Duration(seconds: 5),
     vsync: this,
   )..repeat(reverse: true);
-  late final Animation <double> _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInSine,
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeInSine,
   );
 
   @override
-  void disponse(){
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +35,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             children: [
               Center(
                 child: Container(
+                  width: 350,
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 3, color: Colors.white12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: SizeTransition(
                     sizeFactor: _animation,
-                    axis: Axis.horizontal,
+                    axis: Axis.vertical,
                     axisAlignment: -1,
                     child: Image.asset(
                       "assets/foguete.jpeg",
@@ -54,7 +62,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   width: 400,
                   height: 100,
                   child: Transform.rotate(
-                    angle: -15 * (3.141592653589793 / 180), // Converter 20 graus para radianos
+                    angle: -15 * (3.141592653589793 / 180),
                     child: Center(
                       child: Text(
                         ' HBH Companhia Interestelar',
@@ -71,34 +79,38 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               SizedBox(
                 height: 50,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 80.0),
-                child: Row(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        style:
-                            ElevatedButton.styleFrom(primary: Colors.amberAccent),
-                        child: Text(
-                          "login",
-                          style: TextStyle(color: Colors.black45),
-                        )),
-                    SizedBox(width: 50.0),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/cadastro');
-                        },
-                        style:
-                            ElevatedButton.styleFrom(primary: Colors.amberAccent),
-                        child: Text(
-                          "cadastre-se",
-                          style: TextStyle(color: Colors.black45),
-                        )),
-                  ],
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black45,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center, // Centralizar os botões
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                child: Text(
+                  "login",
+                  style: TextStyle(color: Colors.black45),
                 ),
-              )
+              ),
+              SizedBox(width: 16), // Adicionar espaço entre os botões
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cadastro');
+                },
+                style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                child: Text(
+                  "cadastre-se",
+                  style: TextStyle(color: Colors.black45),
+                ),
+              ),
             ],
           ),
         ),

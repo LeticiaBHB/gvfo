@@ -32,82 +32,100 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(height: 30),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            Container(
+              width: 350,
+              padding: EdgeInsets.all(5),
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(width: 3, color: Colors.white12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Login",
+                      style: TextStyle(color: Colors.yellowAccent),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 20),
+                        Container(
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.white54,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Container(
+                          color: Colors.white70,
+                          width: 250,
+                          child: TextField(
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(labelText: "Login"),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16), // Espaçamento entre as linhas
+                    Text("Senha", style: TextStyle(color: Colors.yellowAccent)),
+                    Row(
+                      children: [
+                        SizedBox(width: 20),
+                        Container(
+                          child: Icon(
+                            Icons.account_balance_wallet_outlined,
+                            color: Colors.white54,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Container(
+                          color: Colors.white70,
+                          width: 250,
+                          child: TextField(
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(labelText: "Senha"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 350,
+              padding: EdgeInsets.all(5),
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(width: 3, color: Colors.white12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
                 children: [
-                  Text(
-                    "Login",
-                    style: TextStyle(color: Colors.yellowAccent),
+                  SizedBox(width: 70),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                    child: Text(
+                      "Entrar",
+                      style: TextStyle(color: Colors.black45),
+                    ),
                   ),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Container(
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white54,
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Container(
-                        color: Colors.white70,
-                        width: 250,
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(labelText: "Login"),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16), // Espaçamento entre as linhas
-                  Text("Senha", style: TextStyle(color: Colors.yellowAccent)),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Container(
-                        child: Icon(
-                          Icons.account_balance_wallet_outlined,
-                          color: Colors.white54,
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Container(
-                        color: Colors.white70,
-                        width: 250,
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(labelText: "Senha"),
-                        ),
-                      ),
-                    ],
+                  SizedBox(width: 60),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/cadastro');
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                    child: Text(
+                      "cadastre-se",
+                      style: TextStyle(color: Colors.black45),
+                    ),
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                SizedBox(width: 70),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
-                  child: Text(
-                    "Entrar",
-                    style: TextStyle(color: Colors.black45),
-                  ),
-                ),
-                SizedBox(width: 60),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/cadastro');
-                  },
-                  style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
-                  child: Text(
-                    "cadastre-se",
-                    style: TextStyle(color: Colors.black45),
-                  ),
-                ),
-              ],
             ),
           ],
         ),
