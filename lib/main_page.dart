@@ -75,6 +75,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         body: PageView(
+
           children: [
             Container(
               color: Colors.blueGrey,
@@ -82,7 +83,6 @@ class _MainPageState extends State<MainPage> {
             Container(
               color: Colors.amberAccent,
             ),
-
           ],
         ),
       ),
