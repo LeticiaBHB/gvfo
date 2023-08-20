@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 import 'Perfil.dart';
 import 'campoTexto.dart';
 
@@ -13,6 +14,25 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   PageController controller = PageController(initialPage: 0);
   int posicaoPagina = 0;
+  List<dynamic>? planetData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPlanetData();
+  }
+
+  Future<void> fetchPlanetData() async {
+    final response =
+        await http.get(Uri.parse('https://swapi.dev/api/planets/'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        planetData = data['results'];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +85,8 @@ class _MainPageState extends State<MainPage> {
                     child: Text('Perfil'),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Perfil()));
                   },
                 ),
                 SizedBox(height: 30),
@@ -85,45 +106,62 @@ class _MainPageState extends State<MainPage> {
             Expanded(
               child: PageView(
                 controller: controller,
-                onPageChanged: (value){
+                onPageChanged: (value) {
                   setState(() {
                     posicaoPagina = value;
                   });
                 },
                 children: [
-                  Container(child: Image.asset('acomodacoes.jpg'),
+                  Container(
+                    child: Image.asset('assets/acomodacoes.jpg'),
                   ),
                   Container(
-                    color: Colors.amberAccent,
+                    child: Image.asset('assets/nave.jpg'),
                   ),
                 ],
               ),
             ),
             Expanded(
-                child: PageView(
-                  onPageChanged: (value){
-                    setState(() {
-                      posicaoPagina = value;
-                    });
-                  },
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    Container(
-                      color: Colors.brown[400],
-                    ),
-                    Container(
-                      color: Colors.brown,
-                    )
-                  ],
-                ),
+              child: PageView(
+                onPageChanged: (value) {
+                  setState(() {
+                    posicaoPagina = value;
+                  });
+                },
+                scrollDirection: Axis.vertical,
+                children: [
+                  Container(
+                    color: Colors.brown[400],
+                    child: ListView.builder(
+                        itemCount: planetData != null ? planetData!.length : 0,
+                        itemBuilder: (context, index) {
+                          var planet = planetData![index];
+                          return Container(
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Nome: ${planet['name']}"),
+                                Text("Rotação: ${planet['rotation_period']}"),
+                                Text("Clima: ${planet['climate']}"),
+                                Text("Gravidade: ${planet['gravity']}"),
+                                Text("Características: ${planet['terrain']}"),
+                                Text("População: ${planet['population']}"),
+                                Divider(), // Separador entre os planetas
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              ),
             ),
             BottomNavigationBar(
               backgroundColor: Colors.white54,
-             onTap: (value){
+              onTap: (value) {
                 controller.jumpToPage(value);
-             }
-              ,
-             currentIndex: posicaoPagina,
+              },
+              currentIndex: posicaoPagina,
               items: [
                 BottomNavigationBarItem(
                   label: 'acomodações',

@@ -5,6 +5,20 @@ class Perfil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+
+    return Scaffold(
+      appBar: AppBar(title: Text('Meu Perfil')),
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Column(
+          children: [
+            Container(
+              child: Text('Nome', style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
