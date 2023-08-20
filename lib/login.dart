@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'main_page.dart';
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -215,6 +217,10 @@ class _LoginState extends State<Login> {
                           SnackBar(content: Text("login efetuado com sucesso!!"),
                           ),
                         );
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainPage()));
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("erro ao efetuar o login"),
