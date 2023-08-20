@@ -8,7 +8,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String email = '';
+  var emailController = TextEditingController(text: "");
   String senha = '';
   bool isObscureText = true;
 
@@ -109,9 +109,9 @@ class _LoginState extends State<Login> {
                           color: Colors.white70,
                           width: 250,
                           child: TextField(
+                            controller: emailController,
                             onChanged: (value){
-                              email = value;
-                              print(email);
+                              debugPrint(value);
                             },
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -207,8 +207,13 @@ class _LoginState extends State<Login> {
                   SizedBox(width: 60),
                   ElevatedButton(
                     onPressed: () {
-                      print(email);
+                      debugPrint(emailController.text);
                       print(senha);
+                      if(emailController.text == 'email@email.com'&& senha == '123'){
+                        debugPrint('login efetuado com sucesso!!');
+                      }else{
+                        debugPrint("erro ao efetuar o login");
+                      }
                     },
                     style:
                         ElevatedButton.styleFrom(primary: Colors.amberAccent),
