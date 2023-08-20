@@ -1,13 +1,46 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  void _esqueciSenhaAlert(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Esqueci minha senha:'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(labelText: "Email para recuperar a senha"),
+                ),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  // Lógica para lidar com o envio do email de recuperação de senha
+                },
+                style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                child: Text(
+                  "Enviar",
+                  style: TextStyle(color: Colors.black45),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +59,15 @@ class _LoginState extends State<Login> {
                 child: ClipOval(
                   child: Image.asset(
                     "assets/foguetinho.jpeg",
-                    fit: BoxFit.cover, // Ajustar a imagem à forma circular
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 20),
             Container(
-              child: Text('Já tem cadastro? Faça seu login',
+              child: Text(
+                'Já tem cadastro? Faça seu login',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
@@ -71,12 +105,25 @@ class _LoginState extends State<Login> {
                           width: 250,
                           child: TextField(
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(labelText: "Login"),
+                            decoration: InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color:  Colors.yellowAccent
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:  Colors.yellowAccent
+                                  )
+                              ),
+                              hintText: "Login",
+                              hintStyle: TextStyle(color: Colors.black45),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16), // Espaçamento entre as linhas
+                    SizedBox(height: 16),
                     Text("Senha", style: TextStyle(color: Colors.yellowAccent)),
                     Row(
                       children: [
@@ -93,7 +140,20 @@ class _LoginState extends State<Login> {
                           width: 250,
                           child: TextField(
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(labelText: "Senha"),
+                            decoration: InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:  Colors.yellowAccent
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:  Colors.yellowAccent
+                                  )
+                                ),
+                                hintText: "Senha",
+                              hintStyle: TextStyle(color: Colors.black45),
+                            ),
                           ),
                         ),
                       ],
@@ -114,7 +174,9 @@ class _LoginState extends State<Login> {
                 children: [
                   SizedBox(width: 30),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _esqueciSenhaAlert(context); // Call the alert function
+                    },
                     style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
                     child: Text(
                       "Esqueci a Senha",
