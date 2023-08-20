@@ -209,10 +209,17 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       debugPrint(emailController.text);
                       print(senha);
-                      if(emailController.text == 'email@email.com'&& senha == '123'){
+                      if(emailController.text.trim() == 'email@email.com'&& senha.trim() == '123'){
                         debugPrint('login efetuado com sucesso!!');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("login efetuado com sucesso!!"),
+                          ),
+                        );
                       }else{
-                        debugPrint("erro ao efetuar o login");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("erro ao efetuar o login"),
+                          ),
+                          );
                       }
                     },
                     style:
