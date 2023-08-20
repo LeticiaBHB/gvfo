@@ -20,7 +20,8 @@ class _LoginState extends State<Login> {
               Container(
                 child: TextField(
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(labelText: "Email para recuperar a senha"),
+                  decoration: InputDecoration(
+                      labelText: "Email para recuperar a senha"),
                 ),
               ),
               SizedBox(height: 16),
@@ -40,6 +41,10 @@ class _LoginState extends State<Login> {
       },
     );
   }
+
+  String email = '';
+  String senha = '';
+  bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -107,15 +112,12 @@ class _LoginState extends State<Login> {
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color:  Colors.yellowAccent
-                                ),
+                                borderSide:
+                                    BorderSide(color: Colors.yellowAccent),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:  Colors.yellowAccent
-                                  )
-                              ),
+                                  borderSide:
+                                      BorderSide(color: Colors.yellowAccent)),
                               hintText: "Login",
                               hintStyle: TextStyle(color: Colors.black45),
                             ),
@@ -139,23 +141,33 @@ class _LoginState extends State<Login> {
                           color: Colors.white70,
                           width: 250,
                           child: TextField(
+                            onChanged: (value) {
+                              senha = value;
+                            },
+                            obscureText: isObscureText,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              suffixIcon: Icon(
-                                Icons.visibility,
-                                color: Colors.black45,
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isObscureText = !isObscureText;
+                                  });
+                                },
+                                child: Icon(
+                                  isObscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.black45,
+                                ),
                               ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  Colors.yellowAccent
-                                  ),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:  Colors.yellowAccent
-                                  )
-                                ),
-                                hintText: "Senha",
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.yellowAccent),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.yellowAccent)),
+                              hintText: "Senha",
                               hintStyle: TextStyle(color: Colors.black45),
                             ),
                           ),
@@ -181,7 +193,8 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       _esqueciSenhaAlert(context); // Call the alert function
                     },
-                    style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.amberAccent),
                     child: Text(
                       "Esqueci a Senha",
                       style: TextStyle(color: Colors.black45),
@@ -190,7 +203,8 @@ class _LoginState extends State<Login> {
                   SizedBox(width: 60),
                   ElevatedButton(
                     onPressed: () {},
-                    style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.amberAccent),
                     child: Text(
                       "Entrar",
                       style: TextStyle(color: Colors.black45),
