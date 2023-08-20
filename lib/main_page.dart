@@ -74,15 +74,32 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        body: PageView(
-
+        body: Column(
           children: [
-            Container(
-              color: Colors.blueGrey,
+            Expanded(
+              child: PageView(
+                children: [
+                  Container(
+                    color: Colors.blueGrey,
+                  ),
+                  Container(
+                    color: Colors.amberAccent,
+                  ),
+                ],
+              ),
             ),
-            Container(
-              color: Colors.amberAccent,
-            ),
+            Expanded(
+                child: PageView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    Container(
+                      color: Colors.purpleAccent,
+                    ),
+                    Container(
+                      color: Colors.brown,
+                    )
+                  ],
+                ),),
           ],
         ),
       ),
