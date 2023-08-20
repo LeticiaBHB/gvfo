@@ -212,11 +212,6 @@ class _LoginState extends State<Login> {
                       debugPrint(emailController.text);
                       print(senha);
                       if(emailController.text.trim() == 'email@email.com'&& senha.trim() == '123'){
-                        debugPrint('login efetuado com sucesso!!');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("login efetuado com sucesso!!"),
-                          ),
-                        );
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
