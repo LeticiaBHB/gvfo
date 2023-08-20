@@ -31,7 +31,13 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
+            Container(
+              child: Text('Já tem cadastro? Faça seu login',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+            ),
+            SizedBox(height: 20),
             Container(
               width: 350,
               padding: EdgeInsets.all(5),
@@ -44,9 +50,11 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Login",
-                      style: TextStyle(color: Colors.yellowAccent),
+                    Center(
+                      child: Text(
+                        "Login",
+                        style: TextStyle(color: Colors.yellowAccent),
+                      ),
                     ),
                     Row(
                       children: [
@@ -104,7 +112,16 @@ class _LoginState extends State<Login> {
               ),
               child: Row(
                 children: [
-                  SizedBox(width: 70),
+                  SizedBox(width: 30),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+                    child: Text(
+                      "Esqueci a Senha",
+                      style: TextStyle(color: Colors.black45),
+                    ),
+                  ),
+                  SizedBox(width: 60),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
@@ -113,18 +130,17 @@ class _LoginState extends State<Login> {
                       style: TextStyle(color: Colors.black45),
                     ),
                   ),
-                  SizedBox(width: 60),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/cadastro');
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
-                    child: Text(
-                      "cadastre-se",
-                      style: TextStyle(color: Colors.black45),
-                    ),
-                  ),
                 ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cadastro');
+              },
+              style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+              child: Text(
+                "cadastre-se",
+                style: TextStyle(color: Colors.black45),
               ),
             ),
           ],
