@@ -10,6 +10,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  int posicaoPagina = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -78,6 +80,11 @@ class _MainPageState extends State<MainPage> {
           children: [
             Expanded(
               child: PageView(
+                onPageChanged: (value){
+                  setState(() {
+                    posicaoPagina = value;
+                  });
+                },
                 children: [
                   Container(
                     color: Colors.blueGrey,
@@ -90,6 +97,11 @@ class _MainPageState extends State<MainPage> {
             ),
             Expanded(
                 child: PageView(
+                  onPageChanged: (value){
+                    setState(() {
+                      posicaoPagina = value;
+                    });
+                  },
                   scrollDirection: Axis.vertical,
                   children: [
                     Container(
@@ -102,23 +114,16 @@ class _MainPageState extends State<MainPage> {
                 ),
             ),
             BottomNavigationBar(
-              backgroundColor: Colors.black45,
+              backgroundColor: Colors.white54,
+             currentIndex: posicaoPagina,
               items: [
                 BottomNavigationBarItem(
                   label: 'acomodações',
-                  icon: Icon(Icons.home_repair_service, color: Colors.amberAccent,),
+                  icon: Icon(Icons.home_repair_service, color: Colors.black45),
                 ),
                 BottomNavigationBarItem(
                   label: 'nave',
-                  icon: Icon(Icons.rocket_launch, color: Colors.amberAccent,),
-                ),
-                BottomNavigationBarItem(
-                  label: 'pacotes',
-                  icon: Icon(Icons.rocket_outlined, color: Colors.amberAccent,),
-                ),
-                BottomNavigationBarItem(
-                  label: 'viagem',
-                  icon: Icon(Icons.mode_of_travel_rounded, color: Colors.amberAccent,),
+                  icon: Icon(Icons.rocket_launch, color: Colors.black45),
                 ),
               ],
             ),
