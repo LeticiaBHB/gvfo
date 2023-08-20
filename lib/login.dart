@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
                         SizedBox(width: 20),
                         Container(
                           child: Icon(
-                            Icons.account_balance_wallet_outlined,
+                            Icons.lock,
                             color: Colors.white54,
                           ),
                         ),
@@ -141,6 +141,10 @@ class _LoginState extends State<Login> {
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.visibility,
+                                color: Colors.black45,
+                              ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color:  Colors.yellowAccent
