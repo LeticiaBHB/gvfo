@@ -93,13 +93,35 @@ class _MainPageState extends State<MainPage> {
                   scrollDirection: Axis.vertical,
                   children: [
                     Container(
-                      color: Colors.purpleAccent,
+                      color: Colors.brown[400],
                     ),
                     Container(
                       color: Colors.brown,
                     )
                   ],
-                ),),
+                ),
+            ),
+            BottomNavigationBar(
+              backgroundColor: Colors.black45,
+              items: [
+                BottomNavigationBarItem(
+                  label: 'acomodações',
+                  icon: Icon(Icons.home_repair_service, color: Colors.amberAccent,),
+                ),
+                BottomNavigationBarItem(
+                  label: 'nave',
+                  icon: Icon(Icons.rocket_launch, color: Colors.amberAccent,),
+                ),
+                BottomNavigationBarItem(
+                  label: 'pacotes',
+                  icon: Icon(Icons.rocket_outlined, color: Colors.amberAccent,),
+                ),
+                BottomNavigationBarItem(
+                  label: 'viagem',
+                  icon: Icon(Icons.mode_of_travel_rounded, color: Colors.amberAccent,),
+                ),
+              ],
+            ),
           ],
         ),
       ),
