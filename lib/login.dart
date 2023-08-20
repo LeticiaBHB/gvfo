@@ -206,7 +206,10 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(width: 60),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print(email);
+                      print(senha);
+                    },
                     style:
                         ElevatedButton.styleFrom(primary: Colors.amberAccent),
                     child: Text(
