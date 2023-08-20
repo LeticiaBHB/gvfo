@@ -8,6 +8,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  String email = '';
+  String senha = '';
+  bool isObscureText = true;
+
   void _esqueciSenhaAlert(context) {
     showDialog(
       context: context,
@@ -41,10 +45,6 @@ class _LoginState extends State<Login> {
       },
     );
   }
-
-  String email = '';
-  String senha = '';
-  bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +109,10 @@ class _LoginState extends State<Login> {
                           color: Colors.white70,
                           width: 250,
                           child: TextField(
+                            onChanged: (value){
+                              email = value;
+                              print(email);
+                            },
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               enabledBorder: UnderlineInputBorder(
