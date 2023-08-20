@@ -47,6 +47,7 @@ class _MainPageState extends State<MainPage> {
                       child: Text('Dados Cadastrais'),
                     ),
                     onTap: () {
+                      Navigator.pop(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -72,6 +73,17 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
+        ),
+        body: PageView(
+          children: [
+            Container(
+              color: Colors.blueGrey,
+            ),
+            Container(
+              color: Colors.amberAccent,
+            ),
+
+          ],
         ),
       ),
     );
