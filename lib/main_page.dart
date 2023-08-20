@@ -28,18 +28,40 @@ class _MainPageState extends State<MainPage> {
                   ),
                   child: ClipOval(
                     child: Image.asset(
-                      "assets/foguetinho.jpeg", width: 100,
+                      "assets/foguetinho.jpeg",
+                      width: 100,
                       height: 100,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
+                SizedBox(height: 60),
+                Divider(),
+                SizedBox(height: 10),
+                InkWell(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      width: double.infinity,
+                      child: Text('Dados Cadastrais'),
+                    ),
+                    onTap: () {}),
                 SizedBox(height: 30),
-                Text('Dados Cadastrais'),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    width: double.infinity,
+                    child: Text('Configurações'),
+                  ),
+                  onTap: () {},
+                ),
                 SizedBox(height: 30),
-                Text('Configurações'),
-                SizedBox(height: 30),
-                Text('Termos de uso e Privacidade'),
+                InkWell(
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      width: double.infinity,
+                      child: Text('Termos de uso e Privacidade')),
+                  onTap: () {},
+                ),
               ],
             ),
           ),
