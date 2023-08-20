@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Perfil.dart';
 import 'campoTexto.dart';
 
 class MainPage extends StatefulWidget {
@@ -10,6 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  PageController controller = PageController(initialPage: 0);
   int posicaoPagina = 0;
 
   @override
@@ -18,7 +20,7 @@ class _MainPageState extends State<MainPage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black45,
-          title: Text('Meu perfil'),
+          title: Text('HBH Companhia Interestelar'),
         ),
         drawer: Drawer(
           child: Padding(
@@ -60,9 +62,11 @@ class _MainPageState extends State<MainPage> {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     width: double.infinity,
-                    child: Text('Configurações'),
+                    child: Text('Perfil'),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                  },
                 ),
                 SizedBox(height: 30),
                 InkWell(
@@ -80,14 +84,14 @@ class _MainPageState extends State<MainPage> {
           children: [
             Expanded(
               child: PageView(
+                controller: controller,
                 onPageChanged: (value){
                   setState(() {
                     posicaoPagina = value;
                   });
                 },
                 children: [
-                  Container(
-                    color: Colors.blueGrey,
+                  Container(child: Image.asset('acomodacoes.jpg'),
                   ),
                   Container(
                     color: Colors.amberAccent,
@@ -115,6 +119,10 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBar(
               backgroundColor: Colors.white54,
+             onTap: (value){
+                controller.jumpToPage(value);
+             }
+              ,
              currentIndex: posicaoPagina,
               items: [
                 BottomNavigationBarItem(
