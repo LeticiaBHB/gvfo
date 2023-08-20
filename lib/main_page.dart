@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'campoTexto.dart';
+
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
 
@@ -44,7 +46,12 @@ class _MainPageState extends State<MainPage> {
                       width: double.infinity,
                       child: Text('Dados Cadastrais'),
                     ),
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CampoTexto()));
+                    }),
                 SizedBox(height: 30),
                 InkWell(
                   child: Container(
