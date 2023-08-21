@@ -204,6 +204,8 @@ class CustonDrawer extends StatelessWidget {
                   context: context,
                   builder: (BuildContext bc) {
                     return AlertDialog(
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       title: Text('HBH Companhia Interestelar'),
                       content: Wrap(
                         children: [

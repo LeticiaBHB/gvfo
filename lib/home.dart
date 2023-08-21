@@ -1,3 +1,4 @@
+import 'package:dados/shared/widgets/video_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -25,7 +26,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     super.initState();
     _videoController = VideoPlayerController.asset("assets/foguete.mp4")
       ..initialize().then((_) {
-        // Ensure the first frame is shown before playing
         setState(() {});
       });
   }
@@ -37,86 +37,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _showAlert() {
+  void _showVideoAlert() {
     showDialog(
       context: context,
-      builder: (context) {
-        final screenHeight = MediaQuery.of(context).size.height;
-        final dialogHeight = screenHeight * 0.5;
-
-        return AlertDialog(
-          contentPadding: EdgeInsets.zero,
-          content: Container(
-            height: dialogHeight,
-            width: double.maxFinite,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Stack(
-                          children: [
-                            VideoPlayer(_videoController),
-                            Align(
-                              alignment: Alignment.center,
-                              child: IconButton(
-                                onPressed: () {
-                                  if (_videoController.value.isPlaying) {
-                                    _videoController.pause();
-                                  } else {
-                                    _videoController.play();
-                                  }
-                                },
-                                icon: Icon(
-                                  _videoController.value.isPlaying
-                                      ? Icons.pause
-                                      : Icons.play_arrow,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 20,
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          color: Colors.black.withOpacity(0.7),
-                          child: Text(
-                            "Este é um Easter Egg:\nOlhe como é por dentro do foguete",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
-                  child: Text("Voltar"),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      builder: (context) => VideoAlert(_videoController),
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +53,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {
-                  _showAlert();
-                },
+                onTap: _showVideoAlert, // Mostra o AlertDialog com o vídeo
                 child: Center(
                   child: Container(
                     width: 350,
