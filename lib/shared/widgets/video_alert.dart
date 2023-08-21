@@ -9,6 +9,7 @@ class VideoAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.black,
       contentPadding: EdgeInsets.zero,
       content: Container(
         width: double.maxFinite,
@@ -24,7 +25,10 @@ class VideoAlert extends StatelessWidget {
                 Navigator.pop(context);
                 videoController.pause();
               },
-              child: Text("Fechar"),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.amberAccent,
+              ),
+              child: Text("Fechar", style: TextStyle(color: Colors.black45),),
             ),
           ],
         ),
