@@ -38,7 +38,9 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Meu Perfil')),
+      appBar: AppBar(
+          backgroundColor: Colors.black45,
+          title: Text('Meu Perfil')),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: Column(
