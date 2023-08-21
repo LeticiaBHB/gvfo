@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'Perfil.dart';
 import 'campoTexto.dart';
+import 'shared/widgets/custon_drawer.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -42,65 +43,7 @@ class _MainPageState extends State<MainPage> {
           backgroundColor: Colors.black45,
           title: Text('HBH Companhia Interestelar'),
         ),
-        drawer: Drawer(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: ClipOval(
-                    child: Image.asset(
-                      "assets/foguetinho.jpeg",
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 60),
-                Divider(),
-                SizedBox(height: 10),
-                InkWell(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      width: double.infinity,
-                      child: Text('Dados Cadastrais'),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CampoTexto()));
-                    }),
-                SizedBox(height: 30),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    width: double.infinity,
-                    child: Text('Perfil'),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Perfil()));
-                  },
-                ),
-                SizedBox(height: 30),
-                InkWell(
-                  child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      width: double.infinity,
-                      child: Text('Termos de uso e Privacidade')),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-        ),
+        drawer: CustonDrawer(),
         body: Column(
           children: [
             Expanded(
