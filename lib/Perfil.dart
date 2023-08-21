@@ -1,3 +1,4 @@
+import 'package:dados/repositories/nivel_repository.dart';
 import 'package:dados/shared/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +12,15 @@ class Perfil extends StatefulWidget {
 class _PerfilState extends State<Perfil> {
   TextEditingController nomeController = TextEditingController(text: '');
   String nome = '';
-  TextEditingController DataNascimento = TextEditingController(text: '');
+  TextEditingController DataNascimentoController = TextEditingController(text: '');
+  DateTime? dataNascimento;
+  var nivelRepository = NivelRepository();
+  var niveis = [];
+  var nivelSelecionado = '';
 
   @override
   void initState() {
+    niveis = nivelRepository.retornaNiveis();
     super.initState();
     nomeController.addListener(() {
       setState(() {
@@ -52,27 +58,52 @@ class _PerfilState extends State<Perfil> {
                 });
               },
             ),
-            SizedBox(height: 12),
             TextLabel(texto: 'Data de nascimento'),
             TextField(
-              controller: DataNascimento,
+              controller: DataNascimentoController,
               readOnly: true,
-              onTap: () async{
-               var data = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime(2023,1,1),
-                    firstDate: DateTime(1900,1,1),
-                    lastDate: DateTime(2023,05,01));
-               print(data);
-               if (data != null){
-                 DataNascimento.text = data.toString();
-               }
+              onTap: () async {
+                var data = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime(2023, 1, 1),
+                  firstDate: DateTime(1900, 1, 1),
+                  lastDate: DateTime(2023, 05, 01),
+                );
+                print(data);
+                if (data != null) {
+                  DataNascimentoController.text = data.toString();
+                  dataNascimento = data;
+                }
               },
             ),
-            TextButton(onPressed: (){
-              print(nomeController.text);
-            },
-              child: Text('salvar')),
+            TextLabel(texto: 'Nível de experiência'),
+            Column(
+              children: niveis
+                  .map((nivel) => RadioListTile(
+                      dense: true,
+                      title: Text(nivel.toString()),
+                      selected: nivelSelecionado == nivel,
+                      value: nivel.toString(),
+                      groupValue: nivelSelecionado,
+                      onChanged: (value) {
+                      print(value);
+                      setState(() {
+                      nivelSelecionado = value.toString();
+                    });
+                  },
+                ),
+              )
+                  .toList(),
+            ),
+            BottomAppBar(
+              child: TextButton(
+                onPressed: () {
+                  print(nomeController.text);
+                  print(dataNascimento);
+                },
+                child: Text('salvar'),
+              ),
+            ),
           ],
         ),
       ),
