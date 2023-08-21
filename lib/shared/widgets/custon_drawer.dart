@@ -1,3 +1,4 @@
+import 'package:dados/home.dart';
 import 'package:flutter/material.dart';
 import '../../Perfil.dart';
 import '../../campoTexto.dart';
@@ -180,6 +181,46 @@ class CustonDrawer extends StatelessWidget {
                           ),
                         ],
                       ),
+                    );
+                  });
+            },
+          ),
+          SizedBox(height: screenHeight * 0.02),
+          Divider(),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Icon(Icons.exit_to_app),
+                  SizedBox(width: 10),
+                  Text('Sair'),
+                ],
+              ),
+            ),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext bc) {
+                    return AlertDialog(
+                      title: Text('HBH Companhia Interestelar'),
+                      content: Wrap(
+                        children: [
+                        Text('Deseja realmente sair do aplicativo?'),
+                    ],
+                    ),
+                      actions: [
+                        TextButton(onPressed: (){
+                          Navigator.pop(context);
+                        },
+                            child:Text('não'),),
+                        TextButton(onPressed: (){
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => Home()));
+                        },
+                            child:Text('sim'),),
+                    ],
                     );
                   });
             },
