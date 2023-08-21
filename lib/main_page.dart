@@ -121,6 +121,11 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
             ),
+            Container(
+              child:
+              Text('Esses os Planetas do nossos roteiros:',
+              style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+              ),
             Expanded(
               child: PageView(
                 onPageChanged: (value) {
@@ -131,25 +136,29 @@ class _MainPageState extends State<MainPage> {
                 scrollDirection: Axis.vertical,
                 children: [
                   Container(
-                    color: Colors.brown[400],
                     child: ListView.builder(
                         itemCount: planetData != null ? planetData!.length : 0,
                         itemBuilder: (context, index) {
                           var planet = planetData![index];
-                          return Container(
-                            padding: EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Nome: ${planet['name']}"),
-                                Text("Rotação: ${planet['rotation_period']}"),
-                                Text("Clima: ${planet['climate']}"),
-                                Text("Gravidade: ${planet['gravity']}"),
-                                Text("Características: ${planet['terrain']}"),
-                                Text("População: ${planet['population']}"),
-                                Divider(), // Separador entre os planetas
-                              ],
-                            ),
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 30),
+                                    Text("Nome: ${planet['name']}"),
+                                    Text("Rotação: ${planet['rotation_period']}"),
+                                    Text("Clima: ${planet['climate']}"),
+                                    Text("Gravidade: ${planet['gravity']}"),
+                                    Text("Características: ${planet['terrain']}"),
+                                    Text("População: ${planet['population']}"),
+                                    Divider(), // Separador entre os planetas
+                                  ],
+                                ),
+                              ),
+                            ],
                           );
                         }),
                   ),
