@@ -1,6 +1,6 @@
 import 'package:dados/home.dart';
 import 'package:flutter/material.dart';
-import '../../Perfil.dart';
+import '../../paginas_dentrologin/Perfil.dart';
 import '../../campoTexto.dart';
 
 class CustonDrawer extends StatelessWidget {

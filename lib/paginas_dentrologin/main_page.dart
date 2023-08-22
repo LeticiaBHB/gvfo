@@ -1,9 +1,8 @@
 import 'dart:convert';
+import 'package:dados/paginas_dentrologin/card_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'Perfil.dart';
-import 'campoTexto.dart';
-import 'shared/widgets/custon_drawer.dart';
+import '../shared/widgets/custon_drawer.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -61,6 +60,7 @@ class _MainPageState extends State<MainPage> {
                   Container(
                     child: Image.asset('assets/nave.jpg'),
                   ),
+                  CardPage(),
                 ],
               ),
             ),
@@ -122,6 +122,10 @@ class _MainPageState extends State<MainPage> {
                 BottomNavigationBarItem(
                   label: 'nave',
                   icon: Icon(Icons.rocket_launch, color: Colors.black45),
+                ),
+                BottomNavigationBarItem(
+                  label: 'card',
+                  icon: Icon(Icons.rocket_rounded, color: Colors.black45),
                 ),
               ],
             ),
