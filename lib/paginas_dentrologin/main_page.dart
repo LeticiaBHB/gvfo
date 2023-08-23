@@ -146,7 +146,7 @@ class _MainPageState extends State<MainPage> {
             ),
             ElevatedButton(
                 onPressed: (){
-                  Navigator.push (context, MaterialPageRoute(builder: (context) => Tarefas()));
+                  Navigator.push (context, MaterialPageRoute(builder: (context) => TarefasPage()));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amberAccent
