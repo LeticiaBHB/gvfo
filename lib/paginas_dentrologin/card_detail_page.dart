@@ -13,8 +13,8 @@ class CardDetailPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           body: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)),
             elevation: 16,
             shadowColor: Colors.amberAccent,
             child: Padding(
@@ -28,7 +28,7 @@ class CardDetailPage extends StatelessWidget {
                       },
                       icon: const Icon(Icons.close)),
                   Center(
-                        child:Image.network(cardDetail.url, height: 200),
+                    child: Image.network(cardDetail.url, height: 200),
                   ),
                   Text(
                     cardDetail.title,
@@ -40,8 +40,8 @@ class CardDetailPage extends StatelessWidget {
                       child: Text(
                         cardDetail.text,
                         textAlign: TextAlign.justify,
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.normal),
                       ),
                     ),
                   ),

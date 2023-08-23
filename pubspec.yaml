@@ -67,7 +67,9 @@ flutter:
      - assets/foguete.mp4
      - assets/acomodacoes.jpg
      - assets/nave.jpg
-
+     - assets/planetas1.jpg
+     - assets/planetas2.jpg
+     - assets/planetas3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

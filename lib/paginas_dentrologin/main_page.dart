@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dados/paginas_dentrologin/Tarefas_page.dart';
 import 'package:dados/paginas_dentrologin/card_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String selectedOption = 'opcao1'; // Valor padrão
   PageController controller = PageController(initialPage: 0);
   int posicaoPagina = 0;
   List<dynamic>? planetData;
@@ -56,17 +58,51 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   Container(
                     child: Image.asset('assets/acomodacoes.jpg'),
+
                   ),
                   Container(
-                    child: Image.asset('assets/nave.jpg'),
+                    child: Center(
+                      child: ListView(
+                        children: [
+                          ListTile(
+                            leading: Image.asset('assets/nave.jpg'),
+                            title: Text('Viage pelas galáxias'),
+                            subtitle:
+                            Text('Todos os planetas você pode conhecer. \nCom o melhor conforto possível'),
+                            trailing: PopupMenuButton<String>(
+                              onSelected: (menu) {
+                                setState(() {
+                                  selectedOption = menu;
+                                });
+                              },
+                              itemBuilder: (BuildContext bc){
+                                return <PopupMenuEntry<String>>[
+                                  PopupMenuItem <String>(value:"opcao1",child: Text('Opção 1')),
+                                  PopupMenuItem <String>(value:"opcao2",child: Text('Opção 2')),
+                                  PopupMenuItem <String>(value:"opcao3",child: Text('Opção 3')),
+                                ];
+                              },
+                            ),
+                            isThreeLine: true,
+                          ),
+                          SizedBox(height: 20), // Espaço entre o ListTile e a imagem
+                          selectedOption == 'opcao1'
+                              ? Image.asset('assets/planetas1.jpg')
+                              : selectedOption == 'opcao2'
+                              ? Image.asset('assets/planetas2.jpg')
+                              : Image.asset('assets/planetas3.jpg'),
+                        ],
+                      ),
+                    ),
                   ),
                   CardPage(),
                 ],
               ),
             ),
+            SizedBox(height: 10),
             Container(
               child:
-              Text('Esses os Planetas do nossos roteiros:',
+              Text('Esses são os detalhes dos Planetas do roteiro:',
               style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
               ),
             Expanded(
@@ -90,7 +126,7 @@ class _MainPageState extends State<MainPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 30),
+                                    SizedBox(height: 10),
                                     Text("Nome: ${planet['name']}"),
                                     Text("Rotação: ${planet['rotation_period']}"),
                                     Text("Clima: ${planet['climate']}"),
@@ -108,6 +144,14 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
             ),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.push (context, MaterialPageRoute(builder: (context) => Tarefas()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.amberAccent
+                ),
+                child: Text('Completador de Tarefas', style: TextStyle(color: Colors.black45),)),
             BottomNavigationBar(
               backgroundColor: Colors.white54,
               onTap: (value) {
