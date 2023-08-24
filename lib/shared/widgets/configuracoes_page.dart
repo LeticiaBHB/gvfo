@@ -30,6 +30,12 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
 
   carregarDados() async {
     storage = await SharedPreferences.getInstance();
+    setState(() {
+      nomeUsuarioController.text = storage.getString(CHAVE_NOME_USUARIO) ?? '';
+      alturaController.text = (storage.getDouble(CHAVE_ALTURA) ?? 0).toString();
+      receberNotificacoes = storage.getBool(CHAVE_RECEBER_NOTIFICACOES) ?? false;
+      temaEscuro = storage.getBool(CHAVE_MODO_ESCURO) ?? false;
+    });
   }
 
   @override
@@ -77,8 +83,9 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                   await storage.setDouble(CHAVE_ALTURA, double.tryParse(alturaController.text) ?? 0);
                   await storage.setBool(CHAVE_RECEBER_NOTIFICACOES, receberNotificacoes);
                   await storage.setBool(CHAVE_MODO_ESCURO, temaEscuro);
-                }, child: Text('Salvar')
-                  ,)
+                  Navigator.pop (context);
+                }, child: Text('Salvar'),
+                  )
               ],
             ),
           ),
