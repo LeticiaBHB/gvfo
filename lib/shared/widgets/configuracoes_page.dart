@@ -80,7 +80,21 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                     }),
                 TextButton(onPressed: () async {
                   await storage.setString(CHAVE_NOME_USUARIO, nomeUsuarioController.text);
-                  await storage.setDouble(CHAVE_ALTURA, double.tryParse(alturaController.text) ?? 0);
+                  try {
+                    await storage.setDouble(CHAVE_ALTURA, double.tryParse(alturaController.text) ?? 0);
+                  } catch (e){
+                    showDialog(context: context, builder: (_){
+                      return AlertDialog(
+                        title: Text('Favor informar um valor válido'),
+                        actions: [
+                          TextButton(onPressed: (){
+                            Navigator.pop(context);
+                          }, child: Text('ok'))
+                        ],
+                      );
+                    });
+                        return;
+                  }
                   await storage.setBool(CHAVE_RECEBER_NOTIFICACOES, receberNotificacoes);
                   await storage.setBool(CHAVE_MODO_ESCURO, temaEscuro);
                   Navigator.pop (context);
