@@ -1,4 +1,5 @@
 import 'package:dados/home.dart';
+import 'package:dados/shared/widgets/configuracoes_page.dart';
 import 'package:flutter/material.dart';
 import '../../paginas_dentrologin/Perfil.dart';
 import '../../campoTexto.dart';
@@ -98,6 +99,25 @@ class CustonDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Perfil()),
+              );
+            },
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              width: double.infinity,
+              child: Row(
+                children: const [
+                  Icon(Icons.settings_suggest),
+                  SizedBox(width: 10),
+                  Text('Configurações'),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConfiguracoesPage()),
               );
             },
           ),
