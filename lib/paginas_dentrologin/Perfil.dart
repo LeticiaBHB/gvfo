@@ -22,14 +22,16 @@ class _PerfilState extends State<Perfil> {
   var niveis = [];
   var linguagens = [];
   var nivelSelecionado = '';
-  List <String> linguagensSelecionadas = [];
+  List<String> linguagensSelecionadas = [];
   int tempoViagem = 0;
   late SharedPreferences storage;
   final String CHAVE_DADOS_PERFIL_NOME = 'CHAVE_DADOS_PERFIL_NOME';
-  final String CHAVE_DADOS_PERFIL_DATA_NASCIMENTO = 'CHAVE_DADOS_PERFIL_DATA_NASCIMENTO';
+  final String CHAVE_DADOS_PERFIL_DATA_NASCIMENTO =
+      'CHAVE_DADOS_PERFIL_DATA_NASCIMENTO';
   final String CHAVE_DADOS_PERFIL_NIVEIS = 'CHAVE_DADOS_PERFIL_NIVEIS';
   final String CHAVE_DADOS_PERFIL_LINGUAGENS = 'CHAVE_DADOS_PERFIL_LINGUAGENS';
-  final String CHAVE_DADOS_PERFIL_TEMPO_VIAGEM = 'CHAVE_DADOS_PERFIL_TEMPO_VIAGEM';
+  final String CHAVE_DADOS_PERFIL_TEMPO_VIAGEM =
+      'CHAVE_DADOS_PERFIL_TEMPO_VIAGEM';
 
   bool salvando = false;
 
@@ -52,8 +54,17 @@ class _PerfilState extends State<Perfil> {
     super.dispose();
   }
 
-  carregarDados() async{
-  storage = await SharedPreferences.getInstance();
+  carregarDados() async {
+    storage = await SharedPreferences.getInstance();
+    nomeController.text = storage.getString(CHAVE_DADOS_PERFIL_NOME) ?? '';
+    DataNascimentoController.text =
+        storage.getString(CHAVE_DADOS_PERFIL_DATA_NASCIMENTO) ?? '';
+    dataNascimento = DateTime.parse(DataNascimentoController.text);
+    nivelSelecionado = storage.getString(CHAVE_DADOS_PERFIL_NIVEIS) ?? '';
+    linguagensSelecionadas =
+        storage.getStringList(CHAVE_DADOS_PERFIL_LINGUAGENS) ?? [];
+    tempoViagem = storage.getInt(CHAVE_DADOS_PERFIL_TEMPO_VIAGEM) ?? 0;
+    setState(() {});
   }
 
   List<DropdownMenuItem<int>> returnItens(int quantidadeMaxima) {
@@ -162,13 +173,11 @@ class _PerfilState extends State<Perfil> {
                       }),
                   BottomAppBar(
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           salvando = false;
                         });
-                        if (nomeController.text
-                            .trim()
-                            .length < 3) {
+                        if (nomeController.text.trim().length < 3) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text('o nome deve ser preenchido')));
@@ -178,7 +187,7 @@ class _PerfilState extends State<Perfil> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content:
-                                  Text('Data de Nascimento inválida')));
+                                      Text('Data de Nascimento inválida')));
                           return;
                         }
                         if (nivelSelecionado.trim() == '') {
@@ -188,10 +197,9 @@ class _PerfilState extends State<Perfil> {
                           return;
                         }
                         if (linguagensSelecionadas.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text(
-                                      'Deve ser selecionado ao menos uma linguagem')));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text(
+                                  'Deve ser selecionado ao menos uma linguagem')));
                           return;
                         }
                         if (tempoViagem == 0) {
@@ -207,17 +215,26 @@ class _PerfilState extends State<Perfil> {
                         print(linguagensSelecionadas);
                         print(tempoViagem);
 
-                        storage.setString(CHAVE_DADOS_PERFIL_NOME, nomeController.text);
-                        storage.setString(CHAVE_DADOS_PERFIL_DATA_NASCIMENTO, dataNascimento.toString());
-                        storage.setString(CHAVE_DADOS_PERFIL_NIVEIS, nivelSelecionado);
-                        storage.setStringList(CHAVE_DADOS_PERFIL_LINGUAGENS, linguagensSelecionadas);
-                        storage.setInt(CHAVE_DADOS_PERFIL_TEMPO_VIAGEM, tempoViagem);
+                        await storage.setString(
+                            CHAVE_DADOS_PERFIL_NOME, nomeController.text);
+                        await storage.setString(
+                            CHAVE_DADOS_PERFIL_DATA_NASCIMENTO,
+                            dataNascimento.toString());
+                        await storage.setString(
+                            CHAVE_DADOS_PERFIL_NIVEIS, nivelSelecionado);
+                        await storage.setStringList(
+                            CHAVE_DADOS_PERFIL_LINGUAGENS,
+                            linguagensSelecionadas);
+                        await storage.setInt(
+                            CHAVE_DADOS_PERFIL_TEMPO_VIAGEM, tempoViagem);
 
                         setState(() {
                           salvando = true;
                         });
-                        Future.delayed(Duration(seconds: 3), (){
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Dados salvos com sucesso!')));
+                        Future.delayed(Duration(seconds: 3), () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Dados salvos com sucesso!')));
                           setState(() {
                             salvando = false;
                           });
