@@ -2,6 +2,7 @@ import 'package:dados/repositories/linguagens_repository.dart';
 import 'package:dados/repositories/nivel_repository.dart';
 import 'package:dados/shared/widgets/text_label.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -21,13 +22,20 @@ class _PerfilState extends State<Perfil> {
   var niveis = [];
   var linguagens = [];
   var nivelSelecionado = '';
-  var linguagensSelecionadas = [];
+  List <String> linguagensSelecionadas = [];
   int tempoViagem = 0;
+  late SharedPreferences storage;
+  final String CHAVE_DADOS_PERFIL_NOME = 'CHAVE_DADOS_PERFIL_NOME';
+  final String CHAVE_DADOS_PERFIL_DATA_NASCIMENTO = 'CHAVE_DADOS_PERFIL_DATA_NASCIMENTO';
+  final String CHAVE_DADOS_PERFIL_NIVEIS = 'CHAVE_DADOS_PERFIL_NIVEIS';
+  final String CHAVE_DADOS_PERFIL_LINGUAGENS = 'CHAVE_DADOS_PERFIL_LINGUAGENS';
+  final String CHAVE_DADOS_PERFIL_TEMPO_VIAGEM = 'CHAVE_DADOS_PERFIL_TEMPO_VIAGEM';
 
   bool salvando = false;
 
   @override
   void initState() {
+    carregarDados();
     niveis = nivelRepository.retornaNiveis();
     linguagens = linguagensRepository.retornaLinguagens();
     super.initState();
@@ -42,6 +50,10 @@ class _PerfilState extends State<Perfil> {
   void dispose() {
     nomeController.dispose();
     super.dispose();
+  }
+
+  carregarDados() async{
+  storage = await SharedPreferences.getInstance();
   }
 
   List<DropdownMenuItem<int>> returnItens(int quantidadeMaxima) {
@@ -194,6 +206,12 @@ class _PerfilState extends State<Perfil> {
                         print(nivelSelecionado);
                         print(linguagensSelecionadas);
                         print(tempoViagem);
+
+                        storage.setString(CHAVE_DADOS_PERFIL_NOME, nomeController.text);
+                        storage.setString(CHAVE_DADOS_PERFIL_DATA_NASCIMENTO, dataNascimento.toString());
+                        storage.setString(CHAVE_DADOS_PERFIL_NIVEIS, nivelSelecionado);
+                        storage.setStringList(CHAVE_DADOS_PERFIL_LINGUAGENS, linguagensSelecionadas);
+                        storage.setInt(CHAVE_DADOS_PERFIL_TEMPO_VIAGEM, tempoViagem);
 
                         setState(() {
                           salvando = true;

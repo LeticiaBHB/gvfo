@@ -79,17 +79,19 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                       setState(() {temaEscuro = value;});
                     }),
                 TextButton(onPressed: () async {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   await storage.setString(CHAVE_NOME_USUARIO, nomeUsuarioController.text);
                   try {
                     await storage.setDouble(CHAVE_ALTURA, double.tryParse(alturaController.text) ?? 0);
                   } catch (e){
                     showDialog(context: context, builder: (_){
                       return AlertDialog(
-                        title: Text('Favor informar um valor válido'),
+                        backgroundColor: Colors.black45,
+                        title: Text('Favor informar um valor válido', textAlign: TextAlign.center,style: TextStyle(color: Colors.white),),
                         actions: [
                           TextButton(onPressed: (){
                             Navigator.pop(context);
-                          }, child: Text('ok'))
+                          }, child: Text('ok', textAlign: TextAlign.center,style: TextStyle(color: Colors.white),))
                         ],
                       );
                     });
