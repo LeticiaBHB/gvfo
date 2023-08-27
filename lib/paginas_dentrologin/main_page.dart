@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dados/paginas_dentrologin/Tarefas_page.dart';
 import 'package:dados/paginas_dentrologin/card_page.dart';
+import 'package:dados/shared/widgets/Qr_code.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../shared/widgets/custon_drawer.dart';
@@ -56,9 +57,16 @@ class _MainPageState extends State<MainPage> {
                   });
                 },
                 children: [
-                  Container(
-                    child: Image.asset('assets/acomodacoes.jpg'),
-
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Qr_code()),
+                      );
+                    },
+                    child: Container(
+                      child: Image.asset('assets/acomodacoes.jpg'),
+                    ),
                   ),
                   Container(
                     child: Center(

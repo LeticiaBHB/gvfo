@@ -102,6 +102,7 @@ class CustonDrawer extends StatelessWidget {
               );
             },
           ),
+          SizedBox(height: screenHeight * 0.05),
           InkWell(
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
